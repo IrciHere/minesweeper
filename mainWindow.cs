@@ -39,7 +39,7 @@ namespace minesweeper
             //wyłącza przycisk
             startButton.Enabled = false;
 
-            //tworzy pole minowe
+            //tworzy wzór pola minowego
             MineFieldGenerator generator = new MineFieldGenerator(width, height, howManyBombs);
             
             //rysuje pole na podstawie wygenerowanego wzoru
