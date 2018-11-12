@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,10 +26,23 @@ namespace minesweeper
             //rysowanie pola (jako przycisku)
             fieldButton.Size = new System.Drawing.Size(25, 25);
             fieldButton.Location = new System.Drawing.Point(positionX, positionY);
+            fieldButton.BackColor = Color.FromArgb(204, 235, 255);
+            fieldButton.FlatStyle = FlatStyle.Flat;
+
             if (isBomb)
-                fieldButton.Text = "B";
+            {
+                fieldButton.Text = "X";
+                fieldButton.ForeColor = Color.Red;
+                fieldButton.Font = new Font(fieldButton.Font.FontFamily, fieldButton.Font.Size, FontStyle.Bold);
+                fieldButton.FlatAppearance.BorderColor = Color.FromArgb(0, 0, 0);
+            }
+                
             else
-                fieldButton.Text = bombsNearby.ToString();
+            {
+                if(bombsNearby != 0)
+                    fieldButton.Text = bombsNearby.ToString();
+            }
+                
             form.Controls.Add(fieldButton);
         }
     }
