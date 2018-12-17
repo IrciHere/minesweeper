@@ -1,0 +1,8 @@
+C:\Users\ircur\source\repos\minesweeper\minesweeper\bin\Release\minesweeper.exe.config
+C:\Users\ircur\source\repos\minesweeper\minesweeper\bin\Release\minesweeper.exe
+C:\Users\ircur\source\repos\minesweeper\minesweeper\bin\Release\minesweeper.pdb
+C:\Users\ircur\source\repos\minesweeper\minesweeper\obj\Release\minesweeper.Field.resources
+C:\Users\ircur\source\repos\minesweeper\minesweeper\obj\Release\minesweeper.csproj.GenerateResource.cache
+C:\Users\ircur\source\repos\minesweeper\minesweeper\obj\Release\minesweeper.csproj.CoreCompileInputs.cache
+C:\Users\ircur\source\repos\minesweeper\minesweeper\obj\Release\minesweeper.exe
+C:\Users\ircur\source\repos\minesweeper\minesweeper\obj\Release\minesweeper.pdb

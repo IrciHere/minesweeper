@@ -23,12 +23,12 @@ namespace minesweeper
             allFieldInt = new int[width + 2, height + 2];
             allFieldBool = new bool[width+2, height+2];
             fieldX = new int[amount]; fieldY = new int[amount];
-            generateMines(width, height, amount);
-            generateField(width, height, amount);
+            GenerateMines(width, height, amount);
+            GenerateField(width, height, amount);
         }
 
         //funkcja losująca pozycje min bez powtórzeń
-        private void generateMines(int width, int height, int amount)
+        private void GenerateMines(int width, int height, int amount)
         {
             for (int i = 0; i < amount; i++)
             {
@@ -47,7 +47,7 @@ namespace minesweeper
         }
 
         //tworzenie pola na podstawie danych
-        private void generateField(int width, int height, int amount)
+        private void GenerateField(int width, int height, int amount)
         {
             //pętla ustawiająca miny na odpowiednich miejscach
             for (int i = 0; i < amount; i++)
@@ -59,13 +59,13 @@ namespace minesweeper
             {
                 for (int j=1; j<=width; j++)
                 {
-                    getNearestCells(j, i);
+                    GetNearestCells(j, i);
                 }
             }
         }
 
         //funkcja sprawdzająca ilość min dookoła
-        private void getNearestCells(int cellX, int cellY)
+        private void GetNearestCells(int cellX, int cellY)
         {
             if (!allFieldBool[cellX, cellY])
             {

@@ -1,7 +1,8 @@
 C:\Users\ircur\source\repos\minesweeper\minesweeper\bin\Debug\minesweeper.exe.config
 C:\Users\ircur\source\repos\minesweeper\minesweeper\bin\Debug\minesweeper.exe
 C:\Users\ircur\source\repos\minesweeper\minesweeper\bin\Debug\minesweeper.pdb
-C:\Users\ircur\source\repos\minesweeper\minesweeper\obj\Debug\minesweeper.csprojAssemblyReference.cache
 C:\Users\ircur\source\repos\minesweeper\minesweeper\obj\Debug\minesweeper.csproj.CoreCompileInputs.cache
 C:\Users\ircur\source\repos\minesweeper\minesweeper\obj\Debug\minesweeper.exe
 C:\Users\ircur\source\repos\minesweeper\minesweeper\obj\Debug\minesweeper.pdb
+C:\Users\ircur\source\repos\minesweeper\minesweeper\obj\Debug\minesweeper.Field.resources
+C:\Users\ircur\source\repos\minesweeper\minesweeper\obj\Debug\minesweeper.csproj.GenerateResource.cache
