@@ -39,9 +39,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Field.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Field.cs" />
     <Compile Include="MineFieldGenerator.cs" />
     <Compile Include="MainForm.cs" />
     <Compile Include="MainWindow.cs">
@@ -52,6 +50,11 @@
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Field.resx">
+      <DependentUpon>Field.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
