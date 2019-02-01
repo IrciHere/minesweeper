@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace minesweeper
@@ -29,8 +24,8 @@ namespace minesweeper
             isBomb = bomb;
             isFlagSet = false;
             //rysowanie pola (jako przycisku)
-            fieldButton = new Button 
-            { 
+            fieldButton = new Button
+            {
                 Size = new System.Drawing.Size(25, 25),
                 Location = new System.Drawing.Point(positionX, positionY),
                 BackColor = Color.FromArgb(204, 235, 255),
@@ -53,7 +48,7 @@ namespace minesweeper
                     PutFlag();
                     break;
             }
-            
+
         }
 
         //po kliknięciu lewym wyłącz przycisk i pokaż co na nim jest

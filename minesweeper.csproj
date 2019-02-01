@@ -54,7 +54,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChosingMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Field.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="MineFieldGenerator.cs" />
     <Compile Include="MainForm.cs" />
     <Compile Include="MainWindow.cs">

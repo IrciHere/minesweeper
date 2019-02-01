@@ -1,41 +1,47 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace minesweeper
 {
-    public class MainWindow: Form
+    public class MainWindow : Form
     {
         //deklaracja potrzebnych zmiennych
         int positionX, positionY, width, height, howManyBombs;
         public Button startButton;
         public Field[,] fieldArray;
+        public ChosingMenu form;
 
-        public MainWindow()
+        public MainWindow(ChosingMenu form, int width, int height, int howManyBombs)
         {
             //tworzenie okna
-            this.Size = new Size(305, 395);
-            this.Text = "Minesweeper";
+            Size = new Size((width * 25) + 80, (height * 25) + 170);
+            Text = "Minesweeper";
 
             //siatka pola
             positionX = 30; positionY = 100;
-            width = 9; height = 9;
-            howManyBombs = 10;
+            this.width = width; this.height = height;
+            this.howManyBombs = howManyBombs;
 
             //przycisk uruchamiający
             startButton = new Button
             {
                 Size = new Size(100, 50),
-                Location = new Point(95, 25),
+                Location = new Point((((width * 25) + 80) / 2) - 60, 25),
                 Text = "START"
             };
             startButton.MouseClick += StartButton_MouseClick;
-            this.Controls.Add(startButton);
+            Controls.Add(startButton);
 
+            //przy zamknięciu okna uruchomi spowrotem wybór poziomu trudności
+            this.form = form;
+            FormClosing += FormClosed;
+        }
+
+        //przy zamykaniu okna
+        private new void FormClosed(object sender, EventArgs e)
+        {
+            form.Visible = true;
         }
 
         private void StartButton_MouseClick(object sender, MouseEventArgs e)
@@ -48,11 +54,11 @@ namespace minesweeper
 
             //rysuje pole na podstawie wygenerowanego wzoru
             fieldArray = new Field[width + 2, height + 2];
-            for (int i = 1; i < width + 1; i++)
+            for (int i = 1; i < height + 1; i++)
             {
-                for (int j = 1; j < height + 1; j++)
+                for (int j = 1; j < width + 1; j++)
                 {
-                    fieldArray[i, j] = new Field(this, positionX, positionY, generator.allFieldBool[i, j], generator.allFieldInt[i, j], i, j);
+                    fieldArray[j, i] = new Field(this, positionX, positionY, generator.allFieldBool[j, i], generator.allFieldInt[j, i], j, i);
                     positionX += 25;
                 }
                 positionY += 25; positionX = 30;
@@ -84,7 +90,7 @@ namespace minesweeper
         {
             int startX = (fieldX - 1), startY = (fieldY - 1);
 
-            for (int i=startX; i < startX + 3; i++)
+            for (int i = startX; i < startX + 3; i++)
             {
                 for (int j = startY; j < startY + 3; j++)
                 {
@@ -104,15 +110,15 @@ namespace minesweeper
                             fieldArray[i, j].isClicked = true;
                             fieldArray[i, j].fieldButton.BackColor = Color.FromArgb(255, 204, 204);
                             CheckWin();
-                            
+
                             //jeżeli na którymś z okolicznych pól nie ma bomby, sprawdza również to pole
                             if (fieldArray[i, j].bombsNearby == 0)
                             {
                                 CheckNearFields(i, j);
                             }
                         }
-                
-                    }             
+
+                    }
                 }
             }
         }

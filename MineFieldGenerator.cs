@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
 
 namespace minesweeper
 {
@@ -21,7 +16,7 @@ namespace minesweeper
         {
             rng = new Random();
             allFieldInt = new int[width + 2, height + 2];
-            allFieldBool = new bool[width+2, height+2];
+            allFieldBool = new bool[width + 2, height + 2];
             fieldX = new int[amount]; fieldY = new int[amount];
             GenerateMines(width, height, amount);
             GenerateField(width, height, amount);
@@ -55,9 +50,9 @@ namespace minesweeper
                 allFieldBool[fieldX[i], fieldY[i]] = true;
             }
             //sprawdzenie każdego pola po kolei na obecność min dookoła
-            for (int i=1; i<=height; i++)
+            for (int i = 1; i <= height; i++)
             {
-                for (int j=1; j<=width; j++)
+                for (int j = 1; j <= width; j++)
                 {
                     GetNearestCells(j, i);
                 }
@@ -82,7 +77,7 @@ namespace minesweeper
                 //tutaj zapisuje na polu ilość min
                 allFieldInt[cellX, cellY] = minesNearby;
                 minesNearby = 0;
-            } 
+            }
         }
     }
 }
