@@ -14,18 +14,20 @@ namespace minesweeper
         private MainWindow form;
         public Button fieldButton;
         public bool isClicked;
-        readonly bool isBomb;
-        bool flag;
-        int bombsNearby;
+        public readonly bool isBomb;
+        public bool isFlagSet;
+        public int bombsNearby, fieldX, fieldY;
 
         //konstruktor pojedynczego pola
-        public Field(MainWindow form, int positionX, int positionY, bool bomb, int bombs)
+        public Field(MainWindow form, int positionX, int positionY, bool bomb, int bombs, int fieldX, int fieldY)
         {
             this.form = form;
+            this.fieldX = fieldX;
+            this.fieldY = fieldY;
             isClicked = false;
             bombsNearby = bombs;
             isBomb = bomb;
-            flag = false;
+            isFlagSet = false;
             //rysowanie pola (jako przycisku)
             fieldButton = new Button 
             { 
@@ -40,24 +42,30 @@ namespace minesweeper
         }
 
         //po kliknięciu przycisku sprawdź przycisk myszy
-        private void FieldClicked(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void FieldClicked(object sender, MouseEventArgs e)
         {
             switch (e.Button)
             {
                 case MouseButtons.Left:
-                    ClickedLeft();
+                    CheckField();
                     break;
                 case MouseButtons.Right:
-                    ClickedRight();
+                    PutFlag();
                     break;
             }
             
         }
 
         //po kliknięciu lewym wyłącz przycisk i pokaż co na nim jest
-        private void ClickedLeft()
+        public void CheckField()
         {
+            if (isClicked || isFlagSet)
+            {
+                return;
+            }
+
             fieldButton.Enabled = false;
+            //jeżeli na polu jest bomba, gracz przegrywa
             if (isBomb)
             {
                 fieldButton.Text = "X";
@@ -67,30 +75,47 @@ namespace minesweeper
                 MessageBox.Show("Bomb! You died...");
                 Application.Exit();
             }
+            //wykona się jeżeli na klikniętym polu nie ma bomby
             else
             {
+                if (isClicked || isFlagSet)
+                {
+                    return;
+                }
                 if (bombsNearby != 0)
+                {
                     fieldButton.Text = bombsNearby.ToString();
+                }
+                else
+                {
+                    form.CheckNearFields(fieldX, fieldY);
+                }
+
+                isClicked = true;
+                fieldButton.BackColor = Color.FromArgb(255, 204, 204);
+                form.CheckWin();
             }
-            isClicked = true;
-            fieldButton.BackColor = Color.FromArgb(255, 204, 204);
-            form.CheckWin();
         }
 
         //po kliknięciu prawym sprawdź oflagowanie
-        private void ClickedRight()
+        private void PutFlag()
         {
-            if (!flag)
+            if (isClicked)
             {
-                flag = true;
+                return;
+            }
+            if (!isFlagSet)
+            {
+                isFlagSet = true;
                 fieldButton.Text = "O";
                 fieldButton.ForeColor = Color.Red;
                 fieldButton.Font = new Font(fieldButton.Font.FontFamily, fieldButton.Font.Size, FontStyle.Bold);
             }
             else
             {
-                flag = false;
+                isFlagSet = false;
                 fieldButton.Text = "";
+                fieldButton.ForeColor = Color.Black;
             }
         }
     }
