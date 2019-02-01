@@ -21,7 +21,7 @@ namespace minesweeper
                 Text = "EASY",
                 Parent = this,
             };
-            buttonEasy.MouseClick += buttonEasy_MouseClick;
+            buttonEasy.MouseClick += ButtonEasy_MouseClick;
 
             buttonMedium = new Button
             {
@@ -30,7 +30,7 @@ namespace minesweeper
                 Text = "MEDIUM",
                 Parent = this
             };
-            buttonMedium.MouseClick += buttonMedium_MouseClick;
+            buttonMedium.MouseClick += ButtonMedium_MouseClick;
 
             buttonHard = new Button
             {
@@ -39,7 +39,7 @@ namespace minesweeper
                 Text = "HARD",
                 Parent = this
             };
-            buttonHard.MouseClick += buttonHard_MouseClick;
+            buttonHard.MouseClick += ButtonHard_MouseClick;
 
             buttonCustom = new Button
             {
@@ -49,32 +49,32 @@ namespace minesweeper
                 Parent = this,
                 Enabled = false
             };
-            buttonCustom.MouseClick += buttonCustom_MouseClick;
+            buttonCustom.MouseClick += ButtonCustom_MouseClick;
 
         }
-        
-        private void buttonEasy_MouseClick(object sender, MouseEventArgs e)
+
+        private void ButtonEasy_MouseClick(object sender, MouseEventArgs e)
         {
             MainWindow mainWindow = new MainWindow(this, 9, 9, 10);
             Visible = false;
-            mainWindow.ShowDialog();           
+            mainWindow.ShowDialog();
         }
 
-        private void buttonMedium_MouseClick(object sender, MouseEventArgs e)
+        private void ButtonMedium_MouseClick(object sender, MouseEventArgs e)
         {
             MainWindow mainWindow = new MainWindow(this, 16, 16, 40);
             Visible = false;
             mainWindow.ShowDialog();
         }
 
-        private void buttonHard_MouseClick(object sender, MouseEventArgs e)
+        private void ButtonHard_MouseClick(object sender, MouseEventArgs e)
         {
             MainWindow mainWindow = new MainWindow(this, 30, 16, 99);
             Visible = false;
             mainWindow.ShowDialog();
         }
 
-        private void buttonCustom_MouseClick(object sender, MouseEventArgs e)
+        private void ButtonCustom_MouseClick(object sender, MouseEventArgs e)
         {
             throw new NotImplementedException();
         }
