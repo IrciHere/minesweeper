@@ -6,7 +6,7 @@ namespace minesweeper
     public class Field
     {
         //deklaracja potrzebnych zmiennych
-        private MainWindow form;
+        private readonly MainWindow _form;
         public Button fieldButton;
         public bool isClicked;
         public readonly bool isBomb;
@@ -16,13 +16,14 @@ namespace minesweeper
         //konstruktor pojedynczego pola
         public Field(MainWindow form, int positionX, int positionY, bool bomb, int bombs, int fieldX, int fieldY)
         {
-            this.form = form;
+            _form = form;
             this.fieldX = fieldX;
             this.fieldY = fieldY;
             isClicked = false;
             bombsNearby = bombs;
             isBomb = bomb;
             isFlagSet = false;
+
             //rysowanie pola (jako przycisku)
             fieldButton = new Button
             {
@@ -31,7 +32,7 @@ namespace minesweeper
                 BackColor = Color.FromArgb(204, 235, 255),
                 FlatStyle = FlatStyle.Flat
             };
-            fieldButton.MouseDown += new MouseEventHandler(FieldClicked);
+            fieldButton.MouseDown += FieldClicked;
 
             form.Controls.Add(fieldButton);
         }
@@ -48,7 +49,6 @@ namespace minesweeper
                     PutFlag();
                     break;
             }
-
         }
 
         //po kliknięciu lewym wyłącz przycisk i pokaż co na nim jest
@@ -60,6 +60,7 @@ namespace minesweeper
             }
 
             fieldButton.Enabled = false;
+
             //jeżeli na polu jest bomba, gracz przegrywa
             if (isBomb)
             {
@@ -70,6 +71,7 @@ namespace minesweeper
                 MessageBox.Show("Bomb! You died...");
                 Application.Exit();
             }
+
             //wykona się jeżeli na klikniętym polu nie ma bomby
             else
             {
@@ -83,12 +85,12 @@ namespace minesweeper
                 }
                 else
                 {
-                    form.CheckNearFields(fieldX, fieldY);
+                    _form.CheckNearFields(fieldX, fieldY);
                 }
 
                 isClicked = true;
                 fieldButton.BackColor = Color.FromArgb(255, 204, 204);
-                form.CheckWin();
+                _form.CheckWin();
             }
         }
 

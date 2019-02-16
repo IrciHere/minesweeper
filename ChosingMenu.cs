@@ -4,13 +4,13 @@ using System.Windows.Forms;
 
 namespace minesweeper
 {
-    public class ChosingMenu : Form
+    public class ChoosingMenu : Form
     {
         public TextBox widthBox, heightBox, minesBox;
         public Label labelEasy, labelMedium, labelHard, widthLabel, heightLabel, minesLabel;
         public Button buttonEasy, buttonMedium, buttonHard, buttonCustom;
         public Label label;
-        public ChosingMenu()
+        public ChoosingMenu()
         {
             Size = new Size(300, 365);
             Text = "Choose Difficulty Level";
@@ -79,8 +79,7 @@ namespace minesweeper
                 Size = new Size(100, 50),
                 Location = new Point(25, 250),
                 Text = "CUSTOM",
-                Parent = this,
-                //Enabled = false
+                Parent = this
             };
             buttonCustom.MouseClick += ButtonCustom_MouseClick;
 
@@ -160,8 +159,9 @@ namespace minesweeper
         {
             if (CheckConditions())
             {
-                int customWidth, customHeight, customMines;
-                customWidth = int.Parse(widthBox.Text); customHeight = int.Parse(heightBox.Text); customMines = int.Parse(minesBox.Text);
+                int customWidth = int.Parse(widthBox.Text);
+                int customHeight = int.Parse(heightBox.Text);
+                int customMines = int.Parse(minesBox.Text);
 
                 MainWindow mainWindow = new MainWindow(this, customWidth, customHeight, customMines);
                 Visible = false;
@@ -175,17 +175,12 @@ namespace minesweeper
 
         private bool CheckConditions()
         {
-            if (Int32.TryParse(widthBox.Text, out int width) && Int32.TryParse(heightBox.Text, out int height) && Int32.TryParse(widthBox.Text, out int mines))
-            {
-                if(width <= 100 && width > 0 && height <= 100 && height > 0 && mines > 0)
-                {
-                    if (mines < width * height)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
+            if (!int.TryParse(widthBox.Text, out int width) || !int.TryParse(heightBox.Text, out int height) || !int.TryParse(widthBox.Text, out int mines))
+                return false;
+
+            if (width > 100 || width <= 0 || height > 100 || height <= 0 || mines <= 0) return false;
+
+            return mines < width * height;
         }
     }
 }

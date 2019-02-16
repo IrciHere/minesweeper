@@ -6,8 +6,8 @@ namespace minesweeper
     {
         public static void Main()
         {
-            ChosingMenu chosingMenu = new ChosingMenu();
-            Application.Run(chosingMenu);
+            ChoosingMenu choosingMenu = new ChoosingMenu();
+            Application.Run(choosingMenu);
         }
     }
 }
