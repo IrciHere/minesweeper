@@ -4,26 +4,32 @@ namespace minesweeper
 {
     internal class MineFieldGenerator
     {
-        //utworzenie potrzebnych zmiennych
+        //
+        //DECLARE VARIABLES NEEDED
+        //
         private readonly Random _rng;
         private readonly int[] _fieldX;
         private readonly int[] _fieldY;
-        public int[,] allFieldInt; public bool[,] allFieldBool;
+        public int[,] allFieldBombsNearby; public bool[,] allFieldIsMine;
         private int _minesNearby;
         private bool _repeat;
 
-        //konstruktor "główny" - tworzy całe pole minowe
+        //
+        //'MAIN' CONSTRUCTOR - CREATES THE MINEFIELD
+        //
         public MineFieldGenerator(int width, int height, int amount)
         {
             _rng = new Random();
-            allFieldInt = new int[width + 2, height + 2];
-            allFieldBool = new bool[width + 2, height + 2];
+            allFieldBombsNearby = new int[width + 2, height + 2];
+            allFieldIsMine = new bool[width + 2, height + 2];
             _fieldX = new int[amount]; _fieldY = new int[amount];
             GenerateMines(width, height, amount);
             GenerateField(width, height, amount);
         }
 
-        //funkcja losująca pozycje min bez powtórzeń
+        //
+        //PICKS RANDOM FIELDS WITHOUT REPEATING
+        //
         private void GenerateMines(int width, int height, int amount)
         {
             for (int i = 0; i < amount; i++)
@@ -42,15 +48,18 @@ namespace minesweeper
             }
         }
 
-        //tworzenie pola na podstawie danych
+        //
+        //CREATES FIELD BASED ON GIVEN DATA
+        //
         private void GenerateField(int width, int height, int amount)
         {
-            //pętla ustawiająca miny na odpowiednich miejscach
+            //puts mines on correct places
             for (int i = 0; i < amount; i++)
             {
-                allFieldBool[_fieldX[i], _fieldY[i]] = true;
+                allFieldIsMine[_fieldX[i], _fieldY[i]] = true;
             }
-            //sprawdzenie każdego pola po kolei na obecność min dookoła
+
+            //counts mines around every single field
             for (int i = 1; i <= height; i++)
             {
                 for (int j = 1; j <= width; j++)
@@ -60,25 +69,27 @@ namespace minesweeper
             }
         }
 
-        //funkcja sprawdzająca ilość min dookoła
+        //
+        //COUNT MINES AROUND
+        //
         private void GetNearestCells(int cellX, int cellY)
         {
-            if (!allFieldBool[cellX, cellY])
+            if (allFieldIsMine[cellX, cellY]) return;
+
+            for (int k = (cellX - 1); k <= (cellX + 1); k++)
             {
-                for (int k = (cellX - 1); k <= (cellX + 1); k++)
+                for (int l = (cellY - 1); l <= (cellY + 1); l++)
                 {
-                    for (int l = (cellY - 1); l <= (cellY + 1); l++)
+                    if (allFieldIsMine[k, l])
                     {
-                        if (allFieldBool[k, l])
-                        {
-                            _minesNearby++;
-                        }
+                        _minesNearby++;
                     }
                 }
-                //tutaj zapisuje na polu ilość min
-                allFieldInt[cellX, cellY] = _minesNearby;
-                _minesNearby = 0;
             }
+
+            //saves number of bonbs around on a field
+            allFieldBombsNearby[cellX, cellY] = _minesNearby;
+            _minesNearby = 0;
         }
     }
 }

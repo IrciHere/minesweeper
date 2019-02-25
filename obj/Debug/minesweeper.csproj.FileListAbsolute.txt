@@ -15,3 +15,7 @@ I:\minesweeper\obj\Debug\minesweeper.csproj.CoreCompileInputs.cache
 I:\minesweeper\obj\Debug\minesweeper.exe
 I:\minesweeper\obj\Debug\minesweeper.pdb
 I:\minesweeper\obj\Debug\minesweeper.csprojAssemblyReference.cache
+I:\minesweeper\bin\Debug\Newtonsoft.Json.dll
+I:\minesweeper\bin\Debug\Newtonsoft.Json.pdb
+I:\minesweeper\bin\Debug\Newtonsoft.Json.xml
+I:\minesweeper\obj\Debug\minesweeper.csproj.CopyComplete

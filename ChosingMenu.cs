@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace minesweeper
@@ -15,7 +14,9 @@ namespace minesweeper
             Size = new Size(300, 365);
             Text = "Choose Difficulty Level";
 
+            //
             //EASY DIFFICULTY
+            //
             buttonEasy = new Button
             {
                 Size = new Size(100, 50),
@@ -34,8 +35,9 @@ namespace minesweeper
             };
             Controls.Add(labelEasy);
 
-
+            //
             //MEDIUM DIFFICULTY
+            //
             buttonMedium = new Button
             {
                 Size = new Size(100, 50),
@@ -54,7 +56,9 @@ namespace minesweeper
             };
             Controls.Add(labelMedium);
 
+            //
             //HARD DIFFICULTY
+            //
             buttonHard = new Button
             {
                 Size = new Size(100, 50),
@@ -73,7 +77,9 @@ namespace minesweeper
             };
             Controls.Add(labelHard);
 
+            //
             //CUSTOM DIFFICULTY
+            //
             buttonCustom = new Button
             {
                 Size = new Size(100, 50),
@@ -132,29 +138,33 @@ namespace minesweeper
             Controls.Add(minesLabel);
         }
 
+        //
         //METHODS USED AFTER PRESSING BUTTONS
+        //
         private void ButtonEasy_MouseClick(object sender, MouseEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow(this, 9, 9, 10);
+            MainWindow mainWindow = new MainWindow(this, 9, 9, 10, "easy");
             Visible = false;
             mainWindow.ShowDialog();
         }
 
         private void ButtonMedium_MouseClick(object sender, MouseEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow(this, 16, 16, 40);
+            MainWindow mainWindow = new MainWindow(this, 16, 16, 40, "medium");
             Visible = false;
             mainWindow.ShowDialog();
         }
 
         private void ButtonHard_MouseClick(object sender, MouseEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow(this, 30, 16, 99);
+            MainWindow mainWindow = new MainWindow(this, 30, 16, 99, "hard");
             Visible = false;
             mainWindow.ShowDialog();
         }
 
+        //
         //SECTION FOR CUSTOM FIELD GENERATOR
+        //
         private void ButtonCustom_MouseClick(object sender, MouseEventArgs e)
         {
             if (CheckConditions())
@@ -163,7 +173,7 @@ namespace minesweeper
                 int customHeight = int.Parse(heightBox.Text);
                 int customMines = int.Parse(minesBox.Text);
 
-                MainWindow mainWindow = new MainWindow(this, customWidth, customHeight, customMines);
+                MainWindow mainWindow = new MainWindow(this, customWidth, customHeight, customMines, "");
                 Visible = false;
                 mainWindow.ShowDialog();
             }
