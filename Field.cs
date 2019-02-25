@@ -1,47 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace minesweeper
 {
     public class Field
     {
-        //deklaracja potrzebnych zmiennych
-        private MainWindow form;
+        //
+        //DECLARE VARIABLES NEEDED
+        //
+        private readonly MainWindow _form;
         public Button fieldButton;
         public bool isClicked;
         public readonly bool isBomb;
         public bool isFlagSet;
         public int bombsNearby, fieldX, fieldY;
 
-        //konstruktor pojedynczego pola
+        //
+        //SINGLE FIELD CONSTRUCTOR
+        //
         public Field(MainWindow form, int positionX, int positionY, bool bomb, int bombs, int fieldX, int fieldY)
         {
-            this.form = form;
+            _form = form;
             this.fieldX = fieldX;
             this.fieldY = fieldY;
             isClicked = false;
             bombsNearby = bombs;
             isBomb = bomb;
             isFlagSet = false;
-            //rysowanie pola (jako przycisku)
-            fieldButton = new Button 
-            { 
+
+            //drawing field (as a button)
+            fieldButton = new Button
+            {
                 Size = new System.Drawing.Size(25, 25),
                 Location = new System.Drawing.Point(positionX, positionY),
                 BackColor = Color.FromArgb(204, 235, 255),
                 FlatStyle = FlatStyle.Flat
             };
-            fieldButton.MouseDown += new MouseEventHandler(FieldClicked);
+            fieldButton.MouseDown += FieldClicked;
 
             form.Controls.Add(fieldButton);
         }
 
-        //po kliknięciu przycisku sprawdź przycisk myszy
+        //check which mouse button was clicked
         private void FieldClicked(object sender, MouseEventArgs e)
         {
             switch (e.Button)
@@ -53,10 +53,11 @@ namespace minesweeper
                     PutFlag();
                     break;
             }
-            
         }
 
-        //po kliknięciu lewym wyłącz przycisk i pokaż co na nim jest
+        //
+        //AFTER PRESSING LEFT MOUSE BUTTON, DISABLE FIELD AND SHOW ITS CONTENT
+        //
         public void CheckField()
         {
             if (isClicked || isFlagSet)
@@ -65,7 +66,8 @@ namespace minesweeper
             }
 
             fieldButton.Enabled = false;
-            //jeżeli na polu jest bomba, gracz przegrywa
+
+            //if there is bomb on a field, player loses
             if (isBomb)
             {
                 fieldButton.Text = "X";
@@ -73,9 +75,10 @@ namespace minesweeper
                 fieldButton.Font = new Font(fieldButton.Font.FontFamily, fieldButton.Font.Size, FontStyle.Bold);
                 fieldButton.FlatAppearance.BorderColor = Color.FromArgb(0, 0, 0);
                 MessageBox.Show("Bomb! You died...");
-                Application.Exit();
+                _form.Close();
             }
-            //wykona się jeżeli na klikniętym polu nie ma bomby
+
+            //entering 'else' if there is no bomb on a field
             else
             {
                 if (isClicked || isFlagSet)
@@ -88,16 +91,18 @@ namespace minesweeper
                 }
                 else
                 {
-                    form.CheckNearFields(fieldX, fieldY);
+                    _form.CheckNearFields(fieldX, fieldY);
                 }
 
                 isClicked = true;
                 fieldButton.BackColor = Color.FromArgb(255, 204, 204);
-                form.CheckWin();
+                _form.CheckWin();
             }
         }
 
-        //po kliknięciu prawym sprawdź oflagowanie
+        //
+        //AFTER PRESSING FIELD WITH RIGHT MOUSE BUTTON
+        //
         private void PutFlag()
         {
             if (isClicked)
@@ -116,6 +121,7 @@ namespace minesweeper
                 isFlagSet = false;
                 fieldButton.Text = "";
                 fieldButton.ForeColor = Color.Black;
+                fieldButton.Font = new Font(fieldButton.Font.FontFamily, fieldButton.Font.Size, FontStyle.Regular);
             }
         }
     }

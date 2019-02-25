@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace minesweeper
 {
@@ -11,8 +6,8 @@ namespace minesweeper
     {
         public static void Main()
         {
-            var mainWindow = new MainWindow();
-            Application.Run(mainWindow);
+            ChoosingMenu choosingMenu = new ChoosingMenu();
+            Application.Run(choosingMenu);
         }
     }
 }
