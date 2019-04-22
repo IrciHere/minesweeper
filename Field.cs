@@ -31,8 +31,8 @@ namespace minesweeper
             //drawing field (as a button)
             fieldButton = new Button
             {
-                Size = new System.Drawing.Size(25, 25),
-                Location = new System.Drawing.Point(positionX, positionY),
+                Size = new Size(25, 25),
+                Location = new Point(positionX, positionY),
                 BackColor = Color.FromArgb(204, 235, 255),
                 FlatStyle = FlatStyle.Flat
             };
@@ -75,6 +75,7 @@ namespace minesweeper
                 fieldButton.Font = new Font(fieldButton.Font.FontFamily, fieldButton.Font.Size, FontStyle.Bold);
                 fieldButton.FlatAppearance.BorderColor = Color.FromArgb(0, 0, 0);
                 MessageBox.Show("Bomb! You died...");
+                _form.timeBoard.StopTimeCount();
                 _form.Close();
             }
 
@@ -115,6 +116,7 @@ namespace minesweeper
                 fieldButton.Text = "O";
                 fieldButton.ForeColor = Color.Red;
                 fieldButton.Font = new Font(fieldButton.Font.FontFamily, fieldButton.Font.Size, FontStyle.Bold);
+                _form.ChangeBombs(-1);
             }
             else
             {
@@ -122,6 +124,7 @@ namespace minesweeper
                 fieldButton.Text = "";
                 fieldButton.ForeColor = Color.Black;
                 fieldButton.Font = new Font(fieldButton.Font.FontFamily, fieldButton.Font.Size, FontStyle.Regular);
+                _form.ChangeBombs(1);
             }
         }
     }

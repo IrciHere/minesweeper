@@ -9,14 +9,14 @@ namespace minesweeper
         //
         //DECLARE VARIABLES NEEDED
         //
-        private int _positionX, _positionY;
+        private int _positionX, _positionY, _bombsLeft;
         private readonly int _width, _height, _howManyBombs;
         private readonly string _difficulty;
         public Button startButton;
         public Field[,] fieldArray;
         public ChoosingMenu form;
         public TimeBoard timeBoard;
-
+        public Label bombsLabel;
 
         public MainWindow(ChoosingMenu form, int width, int height, int howManyBombs, string difficulty)
         {
@@ -28,6 +28,7 @@ namespace minesweeper
             _positionX = 30; _positionY = 100;
             _width = width; _height = height;
             _howManyBombs = howManyBombs;
+            _bombsLeft = howManyBombs;
 
             //start button
             startButton = new Button
@@ -43,9 +44,25 @@ namespace minesweeper
             this.form = form;
             FormClosing += FormClosed;
 
-            //scoreboard and stopwatch object
+            //scoreboard and stopwatch
             _difficulty = difficulty;
-            timeBoard = new TimeBoard();
+            timeBoard = new TimeBoard(this);
+
+            bombsLabel = new Label
+            {
+                AutoSize = true,
+                Location = new Point(5, 5),
+                Text = "BOMBS LEFT: " + _bombsLeft.ToString(),
+                Visible = true,
+                Font = new Font("Arial", 10)
+            };
+            Controls.Add(bombsLabel);
+        }
+
+        public void ChangeBombs(int bombsChange)
+        {
+            _bombsLeft += bombsChange;
+            bombsLabel.Text = "BOMBS LEFT: " + _bombsLeft.ToString();
         }
 
         //when closing window
